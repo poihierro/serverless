@@ -2,7 +2,7 @@
 
 service: my-express-application
 
-plugin:
+plugins:
   - serverless-offline
 
 custom:

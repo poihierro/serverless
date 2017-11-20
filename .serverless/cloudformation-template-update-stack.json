@@ -8,7 +8,7 @@
     "AppLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/serverless-dev-app"
+        "LogGroupName": "/aws/lambda/my-express-application-dev-app"
       }
     },
     "IamRoleLambdaExecution": {
@@ -37,7 +37,7 @@
                 "-",
                 [
                   "dev",
-                  "serverless",
+                  "my-express-application",
                   "lambda"
                 ]
               ]
@@ -52,7 +52,7 @@
                   ],
                   "Resource": [
                     {
-                      "Fn::Sub": "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-dev-app:*"
+                      "Fn::Sub": "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/my-express-application-dev-app:*"
                     }
                   ]
                 },
@@ -63,7 +63,26 @@
                   ],
                   "Resource": [
                     {
-                      "Fn::Sub": "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-dev-app:*:*"
+                      "Fn::Sub": "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/my-express-application-dev-app:*:*"
+                    }
+                  ]
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "dynamodb:Query",
+                    "dynamodb:Scan",
+                    "dynamodb:GetItem",
+                    "dynamodb:PutItem",
+                    "dynamodb:UpdateItem",
+                    "dynamodb:DeleteItem"
+                  ],
+                  "Resource": [
+                    {
+                      "Fn::GetAtt": [
+                        "UsersDynamoDBTable",
+                        "Arn"
+                      ]
                     }
                   ]
                 }
@@ -76,7 +95,7 @@
           "Fn::Join": [
             "-",
             [
-              "serverless",
+              "my-express-application",
               "dev",
               "us-east-1",
               "lambdaRole"
@@ -92,9 +111,9 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverless/dev/1511021772427-2017-11-18T16:16:12.427Z/serverless.zip"
+          "S3Key": "serverless/my-express-application/dev/1511193324699-2017-11-20T15:55:24.699Z/my-express-application.zip"
         },
-        "FunctionName": "serverless-dev-app",
+        "FunctionName": "my-express-application-dev-app",
         "Handler": "index.handler",
         "MemorySize": 1024,
         "Role": {
@@ -104,27 +123,32 @@
           ]
         },
         "Runtime": "nodejs6.10",
-        "Timeout": 6
+        "Timeout": 6,
+        "Environment": {
+          "Variables": {
+            "USERS_TABLE": "users-table-dev"
+          }
+        }
       },
       "DependsOn": [
         "AppLogGroup",
         "IamRoleLambdaExecution"
       ]
     },
-    "AppLambdaVersion3hOkIJmqI8AY8zMIQ6UBgNGsp92wVrVpGsGJfQZrk": {
+    "AppLambdaVersiontO3nJOpDe40zuXF80IPH8AqyeCC0bCD18sqk7LirTM": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "AppLambdaFunction"
         },
-        "CodeSha256": "3hOkIJmqI8/AY8zMIQ6UBgNGsp92wVrVpGsGJf/QZrk="
+        "CodeSha256": "tO3nJOpDe40zuXF80I/PH8AqyeCC0bCD18sqk7LirTM="
       }
     },
     "ApiGatewayRestApi": {
       "Type": "AWS::ApiGateway::RestApi",
       "Properties": {
-        "Name": "dev-serverless"
+        "Name": "dev-my-express-application"
       }
     },
     "ApiGatewayResourceProxyVar": {
@@ -223,7 +247,7 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1511021772444": {
+    "ApiGatewayDeployment1511193324737": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -268,6 +292,28 @@
           ]
         }
       }
+    },
+    "UsersDynamoDBTable": {
+      "Type": "AWS::DynamoDB::Table",
+      "Properties": {
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "userId",
+            "AttributeType": "S"
+          }
+        ],
+        "KeySchema": [
+          {
+            "AttributeName": "userId",
+            "KeyType": "HASH"
+          }
+        ],
+        "ProvisionedThroughput": {
+          "ReadCapacityUnits": 1,
+          "WriteCapacityUnits": 1
+        },
+        "TableName": "users-table-dev"
+      }
     }
   },
   "Outputs": {
@@ -279,7 +325,7 @@
     "AppLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "AppLambdaVersion3hOkIJmqI8AY8zMIQ6UBgNGsp92wVrVpGsGJfQZrk"
+        "Ref": "AppLambdaVersiontO3nJOpDe40zuXF80IPH8AqyeCC0bCD18sqk7LirTM"
       }
     },
     "ServiceEndpoint": {

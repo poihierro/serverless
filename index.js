@@ -13,10 +13,11 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 app.use(bodyParser.json({ strict: false }));
 
 app.get('/', function (req, res) {
-  res.send('Hello World!2')
+  res.send('Hello World!3')
 })
 
-// Get User endpoint
+// Get User endpoint 
+// not yet working
 app.get('/users/:userId', function (req, res) {
   const params = {
     TableName: USERS_TABLE,

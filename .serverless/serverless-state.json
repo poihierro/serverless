@@ -149,7 +149,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/my-express-application/dev/1511193324699-2017-11-20T15:55:24.699Z/my-express-application.zip"
+                "S3Key": "serverless/my-express-application/dev/1511280555182-2017-11-21T16:09:15.182Z/my-express-application.zip"
               },
               "FunctionName": "my-express-application-dev-app",
               "Handler": "index.handler",
@@ -173,14 +173,14 @@
               "IamRoleLambdaExecution"
             ]
           },
-          "AppLambdaVersiontO3nJOpDe40zuXF80IPH8AqyeCC0bCD18sqk7LirTM": {
+          "AppLambdaVersionCz5FJEvbPtZ1RLcOhiRGcpnMfvhAtcZpTsexeSX3A": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AppLambdaFunction"
               },
-              "CodeSha256": "tO3nJOpDe40zuXF80I/PH8AqyeCC0bCD18sqk7LirTM="
+              "CodeSha256": "Cz5FJEvbPtZ1RLcOhiRGcpnMfvhAtc+ZpTsexeS/X3A="
             }
           },
           "ApiGatewayRestApi": {
@@ -285,7 +285,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1511193324737": {
+          "ApiGatewayDeployment1511280555219": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -363,7 +363,7 @@
           "AppLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AppLambdaVersiontO3nJOpDe40zuXF80IPH8AqyeCC0bCD18sqk7LirTM"
+              "Ref": "AppLambdaVersionCz5FJEvbPtZ1RLcOhiRGcpnMfvhAtcZpTsexeSX3A"
             }
           },
           "ServiceEndpoint": {
@@ -404,6 +404,9 @@
     "custom": {
       "tableName": "users-table-dev"
     },
+    "plugins": [
+      "serverless-offline"
+    ],
     "functions": {
       "app": {
         "handler": "index.handler",
@@ -450,7 +453,7 @@
     "artifact": "/Users/thierro/src/git/my-express-application/.serverless/my-express-application.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/my-express-application/dev/1511193324699-2017-11-20T15:55:24.699Z",
+    "artifactDirectoryName": "serverless/my-express-application/dev/1511280555182-2017-11-21T16:09:15.182Z",
     "artifact": "my-express-application.zip"
   }
 }

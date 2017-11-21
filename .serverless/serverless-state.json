@@ -149,7 +149,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/my-express-application/dev/1511280555182-2017-11-21T16:09:15.182Z/my-express-application.zip"
+                "S3Key": "serverless/my-express-application/dev/1511282858000-2017-11-21T16:47:38.000Z/my-express-application.zip"
               },
               "FunctionName": "my-express-application-dev-app",
               "Handler": "index.handler",
@@ -173,14 +173,14 @@
               "IamRoleLambdaExecution"
             ]
           },
-          "AppLambdaVersionCz5FJEvbPtZ1RLcOhiRGcpnMfvhAtcZpTsexeSX3A": {
+          "AppLambdaVersionezF2xJbpqVjvmZpIH5J99nypQul5BewNHT9CK3hYOrM": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AppLambdaFunction"
               },
-              "CodeSha256": "Cz5FJEvbPtZ1RLcOhiRGcpnMfvhAtc+ZpTsexeS/X3A="
+              "CodeSha256": "ezF2xJbpqVjvmZpIH5J99nypQul5BewNHT9CK3hYOrM="
             }
           },
           "ApiGatewayRestApi": {
@@ -285,7 +285,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1511280555219": {
+          "ApiGatewayDeployment1511282858032": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -363,7 +363,7 @@
           "AppLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AppLambdaVersionCz5FJEvbPtZ1RLcOhiRGcpnMfvhAtcZpTsexeSX3A"
+              "Ref": "AppLambdaVersionezF2xJbpqVjvmZpIH5J99nypQul5BewNHT9CK3hYOrM"
             }
           },
           "ServiceEndpoint": {
@@ -402,9 +402,15 @@
       "vpc": {}
     },
     "custom": {
-      "tableName": "users-table-dev"
+      "tableName": "users-table-dev",
+      "dynamodb": {
+        "start": {
+          "migrate": true
+        }
+      }
     },
     "plugins": [
+      "serverless-dynamodb-local",
       "serverless-offline"
     ],
     "functions": {
@@ -453,7 +459,7 @@
     "artifact": "/Users/thierro/src/git/my-express-application/.serverless/my-express-application.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/my-express-application/dev/1511280555182-2017-11-21T16:09:15.182Z",
+    "artifactDirectoryName": "serverless/my-express-application/dev/1511282858000-2017-11-21T16:47:38.000Z",
     "artifact": "my-express-application.zip"
   }
 }

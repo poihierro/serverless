@@ -70,7 +70,7 @@ app.post('/users', function (req, res) {
       userId: userId,
       name: name,
       phonenumber: phonenumber
-    },
+    }
   };
 
   app.post('/users', function (req, res) {
